@@ -1,0 +1,144 @@
+body, html {
+    font-family: 'Roboto', sans-serif;
+}
+.phone-selector {
+    display: flex;
+}
+.phone-power-button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    height: 30px;
+    width: 3px;
+    padding: 0px;
+    background: #353535;
+    margin-top: 30px;
+}
+.phone-container {
+    height: 350px;
+    width: 200px;
+    background: #353535;
+    border-radius: 5px;
+    display: flex;
+    flex-direction: column;
+}
+.phone-header {
+    min-height: 40px;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.phone-speaker {
+    background: #1f1e1e;
+    width: 50px;
+    height: 10px;
+    border-radius: 5px;
+}
+.phone-screen {
+    background: black;
+    flex-grow: 1;
+    margin-right: 10px;
+    margin-left: 10px;
+    border-radius: 2px;
+    display: flex;
+}
+.phone-main-screen {
+    background: url('https://i.imgur.com/WjDAmx0.jpg') no-repeat center;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    flex-grow: 1;
+    background-size: cover;
+    color: white;
+}
+.phone-main-screen-header {
+    font-size: 0.5em;
+    padding: 2px;
+    display: flex;
+    height: 8px;
+    min-height: 8px;
+    justify-content: space-between;
+}
+.phone-main-screen-header-left {
+    display: inline-block;
+    width: 25%;
+}
+.phone-main-screen-header-center {
+    display: inline-block;
+    flex-grow: 1;
+    text-align: center;
+}
+.phone-main-screen-header-right {
+    display: inline-block;
+    width: 25%;
+    text-align: right;
+}
+.phone-main-screen-body {
+    flex-grow: 1;
+    flex-direction: column;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    overflow: hidden;
+    /* transition: background 0.2s ease-in-out; */
+}
+.phone-main-screen-clock {
+    display: inline-block;
+    font-size: 1.5em;
+}
+.phone-main-screen-date {
+    font-size: 0.5em;
+    display: inline-block;
+    margin-left: 5px;
+}
+.phone-footer {
+    min-height: 40px;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+}
+
+.button-home {
+    background: #616161;
+    border: none;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    border-radius: 50%;
+    width: 20px;
+    cursor: pointer;
+}
+.button-unlock-screen {
+    color: white;
+    border: none;
+    background: none;
+    cursor: pointer;
+}
+.blur-screen {
+    filter: blur(2px);
+    -webkit-filter: blur(2px);
+}
+.app-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border: none;
+    background: none;
+    cursor: pointer;
+    color: white;
+    width: 25%;
+}
+.app-container-empty {
+    width: 25%;
+}
+.app-container-row {
+    display: flex;
+    justify-content: space-between;
+    width: -webkit-fill-available;
+    margin: 5px;
+}
+.app-name {
+    font-size: 0.5em;
+    margin-top: 2px;
+}

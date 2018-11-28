@@ -1,0 +1,19 @@
+.insta-post-item-header {
+    color: black;
+    display: flex;
+    padding: 3px 5px;
+}
+.insta-post-item-header img {
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    cursor: pointer;
+    margin-right: 5px;
+}
+.insta-post-item-header-text .title {
+    font-size: 0.7em;
+    font-weight: bold;
+}
+.insta-post-item-body img {
+    width: 100%;
+}
