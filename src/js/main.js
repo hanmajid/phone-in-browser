@@ -93,6 +93,9 @@ function phone(selector, options) {
     ph.homeButton = function() {
         pressHomeButton($(this).get(0));
     };
+    ph.backButton = function() {
+        pressBackButton($(this).get(0));
+    };
 
     drawPhone(ph);
 
@@ -140,7 +143,9 @@ function drawPhone(phone) {
     }
     $(selector+' .phone-main-screen-header-right').append('<div class="phone-battery"><i class="fas '+batteryClass+'"></i></div>');
     $(selector+' .phone-container').append('<div class="phone-footer"></div>');
+    $(selector+' .phone-footer').append('<button class="button-bars button-side"><i class="fas fa-bars"></i></button>');
     $(selector+' .phone-footer').append('<button class="button-home"></button>');
+    $(selector+' .phone-footer').append('<button class="button-back button-side"><i class="fas fa-undo"></i></button>');
     
     if(!phone.isOn)
         $(selector+' .phone-main-screen').hide();
@@ -182,17 +187,38 @@ function pressHomeButton(phone) {
     }
 }
 
+function pressBackButton(phone) {
+    if(phone.isOn) {
+        if(phone.isRunningApp) {
+            var lastPageId = phone[phone.runningApp].pages.pop();
+            if(lastPageId) {
+                $(phone.selector+' .app-detail[data-id="'+lastPageId+'"]').removeClass('active');
+                setTimeout(function() {
+                    $(phone.selector+' .app-detail[data-id="'+lastPageId+'"]').remove();
+                }, 100);
+            }
+            else {
+                backToHome(phone);
+            }
+        }
+    }
+}
+
 function setupButtons(phone) {
     var selector = phone.selector;
     $(selector+' .button-home').unbind();
     $(selector+' .button-unlock-screen').unbind();
     $(selector+' .phone-power-button').unbind();
+    $(selector+' .button-back').unbind();
 
     $(selector+' .phone-power-button').click(function() {
         pressPowerButton(phone);
     });
     $(selector+' .button-home').click(function() {
         pressHomeButton(phone);
+    });
+    $(selector+' .button-back').click(function() {
+        pressBackButton(phone);
     });
     $(selector+' .button-unlock-screen').click(function() {
         if(phone.isPassword) {
@@ -215,6 +241,7 @@ function pressPowerButton(phone) {
 
 function backToHome(phone) {
     var selector = phone.selector;
+    $(selector+' .app-splash').remove();
     $(selector+' .app-sidebar').remove();
     $(selector+' .app-detail').remove();
     $(selector+' .app-screen-header').remove();
@@ -224,6 +251,7 @@ function backToHome(phone) {
 
     $(selector+' .app-container-row').show();
     phone.isRunningApp = false;
+    phone.runningApp = null;
 }
 function powerOff(phone) {
     var selector = phone.selector;
@@ -335,4 +363,10 @@ function unlockPhone(phone) {
     
     $(selector+' .phone-main-screen-body').fadeIn();
     phone.isLocked = false;
+}
+
+function utilAddStyles(selector, styles) {
+    for(var key in styles) {
+        $(selector).css(key, styles[key]);
+    }
 }

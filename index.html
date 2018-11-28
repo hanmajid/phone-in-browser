@@ -12,6 +12,7 @@
     </head>
     <body>
         <div id="my-phone" style="margin-left: 200px"></div>
+        <button id="back">Back</button>
 
         <script src="https://code.jquery.com/jquery-3.3.1.min.js" 
             integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
@@ -49,8 +50,10 @@
                 p.powerButton();
             });
             $('#home-button').click(function() {
-                p.homeButton
-                ();
+                p.homeButton();
+            });
+            $('#back').click(function() {
+                p.backButton();
             });
         </script>
     </body>

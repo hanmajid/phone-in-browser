@@ -137,3 +137,15 @@
 .app-screen-header-title i {
     margin: 3px;
 }
+.app-splash {
+    background: red;
+    width: -webkit-fill-available;
+    height: -webkit-fill-available;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.app-splash img {
+    width: 90px;
+    height: 90px;
+}

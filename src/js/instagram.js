@@ -33,7 +33,22 @@ function openInstagram(phone) {
     phone.instagram = 'instagram' in phone ? phone.instagram : defInstagramOptions;
 
     var o = {
+        id: 'appInstagram',
         baseColor: 'white',
+        splash: {
+            styles: {
+                'background-color': 'white'
+            },
+            time: 2000,
+            // image: 'http://blog.hanmajid.com/images/me-3.jpg'
+            icon: {
+                class: 'fas fa-camera-retro',
+                styles: {
+                    'color': 'black',
+                    'font-size': '30px',
+                }
+            },
+        },
         header: {
             icon: 'fas fa-camera-retro',
             text: 'Pictogram',
@@ -64,7 +79,7 @@ function openInstagram(phone) {
                 icon: 'fas fa-plus',
                 openDetail: true,
                 click: function() {
-                    phone.openDetail('insta-create', {
+                    phone.openDetail('instaCreate', {
                         header: 'Gallery',
                     });
                 }
@@ -76,9 +91,8 @@ function openInstagram(phone) {
                 }
             }
         ],
-        details: [
-            {
-                id: 'insta-create',
+        details: {
+            instaCreate: {
                 slideFrom: 'bottom',
                 header: {
                     color: 'white',
@@ -93,7 +107,7 @@ function openInstagram(phone) {
                     console.log(opt);
                 }
             },
-        ]
+        }
     };
     openApp(phone, o);
     instaGotoHome(phone);

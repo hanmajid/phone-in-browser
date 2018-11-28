@@ -1,6 +1,7 @@
 function openGallery(phone) {
     
     var o = {
+        id: 'appGallery',
         baseColor: 'white',
         header: {
             text: 'All Albums',
@@ -10,9 +11,8 @@ function openGallery(phone) {
             border: true,
             borderColor: 'lightGray',
         },
-        details: [
-            {
-                id: 'album-detail',
+        details: {
+            albumDetail: {
                 slideFrom: 'right',
                 header: {
                     color: '#e8e8e8',
@@ -31,7 +31,7 @@ function openGallery(phone) {
                         $(element).find(' .gallery-image-row-item:last').append('<button class="gallery-image-item" data-id="'+id+'"></button>');
                         $(element).find(' .gallery-image-item[data-id="'+id+'"]').append('<img src="'+image.url+'" />');
                         $(element).find(' .gallery-image-item[data-id="'+id+'"]').click(function() {
-                            phone.openDetail('image-detail', {
+                            phone.openDetail('imageDetail', {
                                 header: image.filename,
                                 data: {
                                     id: id,
@@ -49,8 +49,7 @@ function openGallery(phone) {
                     }
                 }
             },
-            {
-                id: 'image-detail',
+            imageDetail: {
                 slideFrom: 'right',
                 header: {
                     color: '#e8e8e8',
@@ -96,7 +95,7 @@ function openGallery(phone) {
                     }
                 }
             }
-        ]
+        }
     };
     openApp(phone, o);
     galleryGotoHome(phone);
@@ -117,7 +116,7 @@ function galleryGotoHome(phone) {
         $(selector+' .gallery-album-item[data-id="'+id+'"] .gallery-album-item-text').append('<span class="title">'+album.name+'</span>');
         $(selector+' .gallery-album-item[data-id="'+id+'"] .gallery-album-item-text').append('<span class="subtitle">'+album.images.length+'</span>');
         $(selector+' .gallery-album-item[data-id="'+id+'"]').click(function() {
-            phone.openDetail('album-detail', {
+            phone.openDetail('albumDetail', {
                 header: album.name,
                 data: album.images
             });
