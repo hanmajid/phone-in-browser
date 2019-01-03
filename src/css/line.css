@@ -28,6 +28,9 @@
     margin: 0px;
     font-size: 0.5em;
     color: lightgray;
+    line-height: 8px;
+    max-height: 16px;
+    overflow-y: hidden;
 }
 .line-chat-list-item .chat-date {
     font-size: 0.3em;
@@ -41,6 +44,9 @@
     display: flex;
     padding: 5px 7px;
     width: -webkit-fill-available;
+    background: none;
+    border: none;
+    cursor: pointer;
 }
 .line-profile-item>img {
     height: 31px;
@@ -81,6 +87,8 @@
 }
 /* Post Tab */
 .line-post-item {
+    background: none;
+    border: none;
     display: flex;
     flex-direction: column;
     padding-right: 7px;
@@ -94,11 +102,18 @@
     align-items: center;
 
 }
-.line-post-item-header>img {
+.line-post-item-header button {
+    border: none;
+    background: white;
+    padding: 0px;
+    display: flex;
+    align-items: center;
+}
+.line-post-item-header img {
     height: 20px;
     border-radius: 50%;
 }
-.line-post-item-header>span {
+.line-post-item-header span {
     color: black;
     font-size: 9px;
     margin-left: 5px;
@@ -139,4 +154,63 @@
     padding: 0;
     display: block;
     margin-top: 5px;
+}
+.line-profile-bg {
+    height: 200px;
+    object-fit: cover;
+    position: absolute;
+    width: -webkit-fill-available;
+}
+.line-profile-container {
+    width: -webkit-fill-available;
+    height: 200px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+.line-profile-avatar {
+    height: 40px;
+    width: 40px;
+    border-radius: 50%;
+    margin-bottom: 5px;
+}
+.line-profile-title {
+    font-weight: bold;
+}
+.line-profile-subtitle {
+    font-size: 14px;
+}
+.line-profile-container-second {
+    display: flex;
+    justify-content: space-around;
+    padding: 5px;
+}
+.line-profile-container-second>button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: #54586e;
+}
+.line-profile-container-second i {
+    display: block;
+    font-size: 16px;
+}
+.line-profile-container-second span {
+    font-size: 8px;
+}
+.chat-input-container {
+    padding: 2px;
+}
+.chat-input {
+    width: 140px;
+    border-radius: 5px;
+    border: 1px solid lightgrey;
+    margin-right: 5px;
+}
+.chat-input-send {
+    border: none;
+    background: none;
+    cursor: pointer;
+    color: #3e86f7;
 }

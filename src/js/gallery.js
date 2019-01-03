@@ -6,17 +6,44 @@ function openGallery(phone) {
         header: {
             text: 'All Albums',
             size: 'big',
-            color: '#e8e8e8',
-            textColor: 'black',
-            border: true,
-            borderColor: 'lightGray',
+            styles: {
+                'background-color': '#e8e8e8',
+                'color': 'black',
+                'border-bottom': '1px solid lightGray',
+            }
+        },
+        fragments: {
+            home: {
+                type: 'list',
+                data: phone.gallery.albums,
+                fill: function(selector, id, album) {
+                    $(selector).append('<button class="gallery-album-item app-list-body-item" data-id="'+id+'"></button>');
+                    $(selector+' .gallery-album-item[data-id="'+id+'"]').append('<img src="'+album.images[0].url+'" />');
+                    $(selector+' .gallery-album-item[data-id="'+id+'"]').append('<div class="gallery-album-item-text"></div>');
+                    $(selector+' .gallery-album-item[data-id="'+id+'"] .gallery-album-item-text').append('<span class="title">'+album.name+'</span>');
+                    $(selector+' .gallery-album-item[data-id="'+id+'"] .gallery-album-item-text').append('<span class="subtitle">'+album.images.length+'</span>');
+                    $(selector+' .gallery-album-item[data-id="'+id+'"]').click(function() {
+                        phone.openDetail('albumDetail', {
+                            header: album.name,
+                            data: album.images
+                        });
+                    });
+                }
+            }
         },
         details: {
             albumDetail: {
-                slideFrom: 'right',
+                transition: 'slide-right',
                 header: {
-                    color: '#e8e8e8',
-                    textColor: 'black',
+                    styles: {
+                        'background-color': '#e8e8e8',
+                        'color': 'black',
+                    },
+                    back: {
+                        styles: {
+                            'color': 'black',
+                        }
+                    }
                 },
                 body: {
                     color: 'white',
@@ -50,10 +77,17 @@ function openGallery(phone) {
                 }
             },
             imageDetail: {
-                slideFrom: 'right',
+                transition: 'slide-right',
                 header: {
-                    color: '#e8e8e8',
-                    textColor: 'black',
+                    styles: {
+                        'background-color': '#e8e8e8',
+                        'color': 'black',
+                    },
+                    back: {
+                        styles: {
+                            'color': 'black',
+                        }
+                    }
                 },
                 body: {
                     color: 'white',
@@ -98,28 +132,4 @@ function openGallery(phone) {
         }
     };
     openApp(phone, o);
-    galleryGotoHome(phone);
-}
-
-function gallerySetImage(element, images, id) {
-
-}
-
-function galleryGotoHome(phone) {
-    var selector = phone.selector;
-    var gallery = phone.gallery;
-    
-    $(gallery.albums).each(function(id, album) {
-        $(selector+' .app-screen-body').append('<button class="gallery-album-item gallery-body-item" data-id="'+id+'"></button>');
-        $(selector+' .gallery-album-item[data-id="'+id+'"]').append('<img src="'+album.images[0].url+'" />');
-        $(selector+' .gallery-album-item[data-id="'+id+'"]').append('<div class="gallery-album-item-text"></div>');
-        $(selector+' .gallery-album-item[data-id="'+id+'"] .gallery-album-item-text').append('<span class="title">'+album.name+'</span>');
-        $(selector+' .gallery-album-item[data-id="'+id+'"] .gallery-album-item-text').append('<span class="subtitle">'+album.images.length+'</span>');
-        $(selector+' .gallery-album-item[data-id="'+id+'"]').click(function() {
-            phone.openDetail('albumDetail', {
-                header: album.name,
-                data: album.images
-            });
-        });
-    });
 }

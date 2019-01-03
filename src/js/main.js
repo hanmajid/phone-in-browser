@@ -14,13 +14,13 @@ function phone(selector, options) {
         apps: [
             [
                 'line',
-                'twitter',
-                'instagram',
-                'facebook',
+                'gallery',
+                '',
+                ''
             ],
         ],
         appConfig: {
-
+            //
         },
         battery: 80,
         isInternet: true,
@@ -72,7 +72,7 @@ function phone(selector, options) {
                     ]
                 }
             ]
-        }
+        },
     };
     if(!options) {
         options = defOptions;
@@ -81,6 +81,7 @@ function phone(selector, options) {
     for (var key in defOptions) {
         ph[key] = key in options ? options[key] : defOptions[key];
     }
+    ph.line = 'line' in options ? options.line : null;
     // ph.isPassword = 'isPassword' in options ? options.isPassword : defOptions.isPassword;
     // ph.isLocked = 'isLocked' in options ? options.isLocked : defOptions.isLocked;
     // ph.isOn = 'isOn' in options ? options.isOn : defOptions.isOn;

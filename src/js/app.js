@@ -36,11 +36,13 @@ function openAppMainPage(phone, options, selector) {
     $(selector+' .phone-main-screen-body').css('background', options.baseColor);
     
     if(options.header) {
-        $(selector+' .phone-main-screen-body').append('<div class="app-screen-header" style="background:'+options.header.color+';"></div>');
-        $(selector+' .app-screen-header').append('<div class="app-screen-header-title" style="color:'+options.header.textColor+'">'+options.header.text+'</div>');
+        $(selector+' .phone-main-screen-body').append('<div class="app-screen-header"></div>');
+        utilAddStyles(selector+' .app-screen-header', options.header.styles);
+        $(selector+' .app-screen-header').append('<div class="app-screen-header-title">'+options.header.text+'</div>');
         if(options.sidebar) {
             $(selector+' .phone-main-screen-body').append('<div class="app-sidebar" />');
-            $(selector+' .app-sidebar').append('<div class="app-sidebar-left" style="background:'+options.sidebar.color+';box-shadow:'+options.sidebar.boxShadow+'" />');
+            $(selector+' .app-sidebar').append('<div class="app-sidebar-left"></div>');
+            utilAddStyles(selector+' .app-sidebar-left', options.sidebar.styles);
             options.sidebar.fill();
         }
         if(options.details) {
@@ -48,14 +50,29 @@ function openAppMainPage(phone, options, selector) {
                 var selector = this.selector;
                 var detail = this.options.details[id];
                 var newId = id + (new Date()).getTime();
-                $(selector+' .phone-main-screen-body').append('<div class="app-detail app-detail-'+detail.slideFrom+'" data-id="'+newId+'"></div>');
-                $(selector+' .app-detail[data-id="'+newId+'"]').append('<div class="app-detail-header" style="background:'+detail.header.color+'"></div>');
-                $(selector+' .app-detail[data-id="'+newId+'"] .app-detail-header').append('<button class="app-detail-header-back-btn"><i class="'+(detail.header.icon?detail.header.icon:'fa fa-chevron-left')+'"></i></button>');
-                $(selector+' .app-detail[data-id="'+newId+'"] .app-detail-header').append('<span class="app-detail-header-title" style="color:'+detail.header.textColor+'"></span>');
-                $(selector+' .app-detail[data-id="'+newId+'"]').append('<div class="app-detail-body" style="background:'+detail.body.color+';overflow-y:'+(detail.body.scroll?'scroll':'hidden')+'"></div>');
-                $(selector+' .app-detail[data-id="'+newId+'"] .app-detail-header-back-btn').click(function() {
-                    phone.backButton();
+                $(selector+' .phone-main-screen-body').append('<div class="app-detail" data-id="'+newId+'"></div>');
+                $(selector+' .app-detail[data-id="'+newId+'"]').addClass(detail.transition);
+                $(selector+' .app-detail[data-id="'+newId+'"]').append('<div class="app-detail-header"></div>');
+                utilAddStyles(selector+' .app-detail[data-id="'+newId+'"] .app-detail-header', detail.header.styles);
+                $(selector+' .app-detail[data-id="'+newId+'"] .app-detail-header').append('<div class="app-detail-header-left"></div>');
+                $(selector+' .app-detail[data-id="'+newId+'"] .app-detail-header').append('<div class="app-detail-header-right"></div>');
+                if(detail.header.back) {
+                    $(selector+' .app-detail[data-id="'+newId+'"] .app-detail-header-left').append('<button class="app-detail-header-back-btn"><i class="'+(detail.header.back.icon?detail.header.back.icon:'fa fa-chevron-left')+'"></i></button>');
+                    utilAddStyles(selector+' .app-detail[data-id="'+newId+'"] .app-detail-header-back-btn', detail.header.back.styles);
+                    $(selector+' .app-detail[data-id="'+newId+'"] .app-detail-header-back-btn').click(function() {
+                        phone.backButton();
+                    });
+                }
+                $(selector+' .app-detail[data-id="'+newId+'"] .app-detail-header-left').append('<span class="app-detail-header-title"></span>');
+                $(detail.header.menus).each(function(j, menu) {
+                    $(selector+' .app-detail[data-id="'+newId+'"] .app-detail-header-right').append('<button data-id="'+j+'"></button>');
+                    $(selector+' .app-detail[data-id="'+newId+'"] .app-detail-header-right button[data-id="'+j+'"]').append('<i class="'+menu.icon+'"></i>');
+                    $(selector+' .app-detail[data-id="'+newId+'"] .app-detail-header-right button[data-id="'+j+'"]').click(function() {
+                        menu.click(phone, opt);
+                    });
                 });
+                
+                $(selector+' .app-detail[data-id="'+newId+'"]').append('<div class="app-detail-body" style="background:'+detail.body.color+';overflow-y:'+(detail.body.scroll?'scroll':'hidden')+'"></div>');                
 
                 var element = $(selector+' .app-detail[data-id="'+newId+'"]');
                 setTimeout(function() {
@@ -82,9 +99,9 @@ function openAppMainPage(phone, options, selector) {
         if(options.header.icon) {
             $(selector+' .app-screen-header-title').prepend('<i class="'+options.header.icon+'"></i>');
         }
-        if(options.header.border) {
-            $(selector+' .app-screen-header-title').css('border-bottom', '1px solid '+options.header.borderColor);
-        }
+        // if(options.header.border) {
+        //     $(selector+' .app-screen-header-title').css('border-bottom', '1px solid '+options.header.borderColor);
+        // }
         if(options.header.size === 'small') {
             $(selector+' .app-screen-header-title').addClass('header-small');
         }
@@ -112,10 +129,8 @@ function openAppMainPage(phone, options, selector) {
     }
     $(selector+' .phone-main-screen-body').append('<div class="app-screen-body"></div>');
     if(options.footer) {
-        $(selector+' .phone-main-screen-body').append('<div class="app-screen-footer" style="background:'+options.footer.color+';"></div>');
-        if(options.footer.border) {
-            $(selector+' .app-screen-footer').css('border-top', '1px solid '+options.footer.borderColor);
-        }
+        $(selector+' .phone-main-screen-body').append('<div class="app-screen-footer"></div>');
+        utilAddStyles(selector+' .app-screen-footer', options.footer.styles);
         $(selector+' .app-screen-footer').append('<div class="app-screen-footer-navmenu"></div>');
         $(options.footerMenus).each(function(id, n) {
             $(selector+' .app-screen-footer-navmenu').append('<button class="app-footer-navmenu-menu '+(n.active?'active':'')+'" data-id="'+id+'"><i class="'+n.icon+'"></i></button>');
@@ -135,5 +150,22 @@ function openAppMainPage(phone, options, selector) {
             if('click' in options.footerMenus[i])
                 options.footerMenus[i].click();
         });
+    }
+    if(options.fragments) {
+        phone.openFragment = function(id) {
+            var selector = phone.selector;
+            $(selector+' .app-list-body-item').remove();
+            if(options.fragments[id]) {
+                if(options.fragments[id].type === 'list') {
+                    $(options.fragments[id].data).each(function(i, d) {
+                        options.fragments[id].fill(selector+' .app-screen-body', i, d);
+                    });
+                }
+                else {
+                    options.fragments[id].fill(selector+' .app-screen-body', options.fragments[id].data);
+                }
+            }
+        };
+        phone.openFragment('home');
     }
 }

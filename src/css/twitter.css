@@ -8,10 +8,17 @@
     width: -webkit-fill-available;
     flex-direction: column;
 }
-.twitter-item-body>img {
+.twitter-item-body-left {
+    background: none;
+    border: none;
+    cursor: pointer;
+    height: fit-content;
+    padding: 0px;
+    margin-right: 5px;
+}
+.twitter-item-body-left img {
     height: 31px;
     border-radius: 50%;
-    margin-right: 5px;
 }
 .twitter-item-body {
     width: -webkit-fill-available;

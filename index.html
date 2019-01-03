@@ -11,41 +11,14 @@
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
     </head>
     <body>
-        <div id="my-phone" style="margin-left: 200px"></div>
-        <button id="back">Back</button>
+        <div id="my-phone"></div>
 
         <script src="https://code.jquery.com/jquery-3.3.1.min.js" 
             integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
             crossorigin="anonymous"></script>
         <script src="dist/phone-in-browser.js"></script>
         <script>
-            var p = phone('#my-phone', {
-                isInternet: false,
-                battery: 96,
-                apps: [
-                    ['line', '', 'facebook', ''],
-                    ['', 'instagram', '', 'twitter'],
-                    ['email', 'browser', 'gallery', '']
-                ],
-                appConfig: {
-                    email: {
-                        name: 'Email',
-                        icon: 'fas fa-envelope',
-                        iconColor: 'red',
-                        click: function() {
-                            console.log('open email');
-                        }
-                    },
-                    browser: {
-                        name: 'Browser',
-                        icon: 'fas fa-globe',
-                        iconColor: 'blue',
-                        click: function() {
-                            console.log('open browser');
-                        }
-                    },
-                }
-            });
+            var p = phone('#my-phone');
             $('#power-button').click(function() {
                 p.powerButton();
             });
@@ -55,6 +28,7 @@
             $('#back').click(function() {
                 p.backButton();
             });
+            console.log(p);
         </script>
     </body>
 </html>

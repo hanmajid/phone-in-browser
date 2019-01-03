@@ -78,7 +78,6 @@
 }
 .app-detail {
     position: absolute;
-    background: red;
     width: 180px;
     height: 258px;
     display: flex;
@@ -86,37 +85,50 @@
     flex-direction: column;
     /* display: none; */
 }
-.app-detail.app-detail-right {
+.app-detail.slide-right {
     right: -180px;
 }
-.app-detail.app-detail-left {
+.app-detail.slide-left {
     left: -180px;
 }
-.app-detail.app-detail-top {
+.app-detail.slide-top {
     top: -258px;
 }
-.app-detail.app-detail-bottom {
+.app-detail.slide-bottom {
     bottom: -258px;
 }
 .app-detail.active {
     transition: 0.2s;
 }
-.app-detail.app-detail-right.active {
+.app-detail.slide-right.active {
     right: 0px;
 }
-.app-detail.app-detail-left.active {
+.app-detail.slide-left.active {
     left: 0px;
 }
-.app-detail.app-detail-top.active {
+.app-detail.slide-top.active {
     top: 0px;
 }
-.app-detail.app-detail-bottom.active {
+.app-detail.slide-bottom.active {
     bottom: 0px;
 }
 .app-detail .app-detail-header {
     display: flex;
     padding: 10px 5px;
     align-items: center;
+    height: 20px;
+    min-height: 20px;
+    justify-content: space-between;
+}
+.app-detail .app-detail-header-left {
+    display: flex;
+    align-items: center;
+}
+.app-detail .app-detail-header-right button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: inherit;
 }
 .app-detail .app-detail-header-back-btn {
     background: none;
@@ -148,4 +160,48 @@
 .app-splash img {
     width: 90px;
     height: 90px;
+}
+
+/* chat */
+.chat-body {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column-reverse;
+    background-color: #849ec0;
+    overflow-y: scroll;
+}
+.chat-body-item.chat-left {
+    display: flex;
+    margin-left: 5px;
+    margin-bottom: 2px;
+    min-height: 21px;
+}
+.chat-body-item.chat-right {
+    display: flex;
+    justify-content: flex-end;
+    margin-right: 5px;
+    margin-bottom: 2px;
+    min-height: 21px;
+}
+.chat-body-desc {
+    color: white;
+    font-size: 7px;
+    display: flex;
+    align-items: flex-end;
+    margin-left: 3px;
+    margin-right: 3px;
+}
+.chat-left .chat-body-text {
+    color: black;
+    font-size: 11px;
+    background: white;
+    padding: 4px 8px;
+    border-radius: 10px;
+}
+.chat-right .chat-body-text {
+    color: black;
+    font-size: 11px;
+    background: #b2ed8b;
+    padding: 4px 8px;
+    border-radius: 10px;
 }
